@@ -6,8 +6,8 @@ unsigned short pulsador[C_PULSADORES] = {6,7};  // el 6 es el derecho y 7 el izq
 short estado = 0; //me sirve para cambiar el estado de los leds
 
 //condiciones para el antirrebote de los pulsadores
-unsigned short pulsa_der_1=1;   //me va a ayudar como condición para que no avance los led cuando queda sin presionar el botón derecho
-unsigned short pulsa_izq_1=1;   //me va a ayudar como condición para que no avance los led cuando queda sin presionar el botón izquierdo
+bool pulsa_der_1=1;   //me va a ayudar como condición para que no avance los led cuando queda sin presionar el botón derecho
+bool pulsa_izq_1=1;   //me va a ayudar como condición para que no avance los led cuando queda sin presionar el botón izquierdo
 
 void setup() {
 //configurar los pines de salida
