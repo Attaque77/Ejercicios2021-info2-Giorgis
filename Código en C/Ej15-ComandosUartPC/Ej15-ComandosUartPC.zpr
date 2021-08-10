@@ -23,7 +23,7 @@ cursor=0:0
 open=true
 [source]
 path=Ej15-ComandosUartPC.c
-cursor=1:0
+cursor=0:0
 open=true
 [header]
 path=rs232.h
