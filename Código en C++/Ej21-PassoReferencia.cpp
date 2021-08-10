@@ -13,7 +13,6 @@ using namespace std;
 							  
 int main(int argc, char *argv[]) {
 	
-	
 	double cuenta=2.5;
 	tripleLlamadaPorValor(cuenta);
 	triplePorReferencia(cuenta);

@@ -7,7 +7,6 @@ int main(int argc, char *argv[]) {
 	char domicilio[20];
 	char ciudad[20];
 	char estado[10];
-	
 	int codigo_postal;
 	
 	cout<<"Ingrese su nombre: "<<  endl;
