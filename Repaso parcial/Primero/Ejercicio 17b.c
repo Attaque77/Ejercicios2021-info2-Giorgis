@@ -18,24 +18,31 @@ struct mercaderia{
 void Cargar_datos(){
 	
 	int cant;
-	printf("CANTIDAD DE PRODUCTOS: ");
+	printf("\nCANTIDAD DE PRODUCTOS: ");
 	scanf("%d",&cant);
 	
-	printf("\n");
 	for(int i=1; i<=cant; i++){
 		
-		printf("Ingrese su producto: ");
-		scanf("%s",producto.descripcion);
-		printf("Ingrese el c%cdigo: ",162);
-		scanf("%d",&producto.codigo);
-		printf("Ingrese el precio: "); 
-		scanf("%f",&producto.precio);
+		ptr_producto=( struct mercaderia *) calloc (cant,sizeof(struct mercaderia) );
+		ptr_producto=&producto;
 		
+		printf("\nIngrese su producto: ");
+		scanf("%s",ptr_producto->descripcion);
+		printf("Ingrese el c%cdigo: ",162);
+		scanf("%d",&ptr_producto->codigo);
+		printf("Ingrese el precio: "); 
+		scanf("%f",&ptr_producto->precio);
+	
 		Almacenar_datos();
-		system("pause");      
-		system ("cls");
+		free(ptr_producto);
+		ptr_producto=NULL;
 	}
+	
+	ptr_producto=( struct mercaderia *) calloc (cant,sizeof(struct mercaderia) );
+	ptr_producto=&producto;
+	
 }
+	
 	void Almacenar_datos(){
 		
 		FILE *archivo;
@@ -64,9 +71,9 @@ void Cargar_datos(){
 			fread(ptr_producto,sizeof(producto),1,archivo);
 				
 		while ( !feof(archivo)) {
-			printf("\nProductos: %s\n", producto.descripcion);
-			printf("Codigo: %i\n", producto.codigo);
-			printf("Precio: %.2f\n",producto.precio);
+			printf("\nProductos: %s\n", ptr_producto->descripcion);
+			printf("Codigo: %i\n", ptr_producto->codigo);
+			printf("Precio: %.2f\n",ptr_producto->precio);
 			fread(ptr_producto,sizeof(producto),1,archivo);
 		}
 		}
@@ -74,11 +81,11 @@ void Cargar_datos(){
 		}
 			
 		void Mostrar_datos_codigo(){
-				
-			ptr_producto=&producto;
-			int valor;
+			
+			int valor;	
 			FILE *archivo;
-				
+			ptr_producto=&producto;
+			
 			printf("\nIngrese el codigo: ");
 			scanf("%d",&valor);
 				
@@ -90,10 +97,10 @@ void Cargar_datos(){
 				
 			while ( !feof(archivo)) {
 					
-				if(valor==producto.codigo){
-					printf("\nProductos: %s\n", producto.descripcion);
-					printf("Codigo: %i\n",producto.codigo);
-					printf("Precio: %.2f\n",producto.precio);
+				if(valor==(ptr_producto->codigo)){                                  
+					printf("\nProductos: %s\n", ptr_producto->descripcion);
+					printf("Codigo: %i\n",ptr_producto->codigo);
+					printf("Precio: %.2f\n",ptr_producto->precio);
 				}
 					
 				fread(ptr_producto,sizeof(producto),1,archivo);	
@@ -126,6 +133,6 @@ int main() {
 		system ("cls");
 		
 	} while( (0<=dato) && (dato<=3) );
-					
+
 	return 0;
 }
