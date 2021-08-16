@@ -133,6 +133,9 @@ int main() {
 		system ("cls");
 		
 	} while( (0<=dato) && (dato<=3) );
-
+	
+	free(ptr_producto);                                                              //Liberamos memoria
+	ptr_producto=NULL;                                                               /*Apuntamos a NULL porque el puntero tiene todavía las direcciones 
+	                                                                                   de memoria guardadas pero no las puede usar porque ya las liberó*/
 	return 0;
 }
