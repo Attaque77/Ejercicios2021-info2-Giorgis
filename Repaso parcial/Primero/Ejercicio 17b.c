@@ -22,7 +22,7 @@ void Cargar_datos(int *cant){
 	
 	for(int i=1; i<=(*cant); i++){
 		
-		ptr_producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );   /*(struct mercaderia*) es el casteo, para indicar el tipo de dato 
+		ptr_producto=( struct mercaderia*) malloc (sizeof(struct mercaderia) );   /*(struct mercaderia*) es el casteo, para indicar el tipo de dato 
 		                                                                                   del puntero devuelto, y para que el puntero sepa la longitud
 		                                                                                   del tipo de dato en la memoria*/                                                                                       
 		printf("\nIngrese su producto: ");
@@ -63,7 +63,7 @@ void Cargar_datos(int *cant){
 			
 		else{
 				
-			printf("\nlISTA DE DATOS INGRESADOR\n");
+			printf("\nLISTA DE DATOS INGRESADOS\n");
 			fread(producto,sizeof(struct mercaderia),1,archivo);                       //Leemos el archivo binario
 				
 		while ( !feof(archivo)) {                                                      //feof= fin de archivo- hasta que no lo encuentre no termina-
@@ -134,8 +134,5 @@ int main() {
 		
 	} while( (0<=dato) && (dato<=3) );
 	
-	free(ptr_producto);                                                              //Liberamos memoria
-	ptr_producto=NULL;                                                               /*Apuntamos a NULL porque el puntero tiene todavía las direcciones 
-	                                                                                   de memoria guardadas pero no las puede usar porque ya las liberó*/
 	return 0;
 }

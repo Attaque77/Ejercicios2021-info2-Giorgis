@@ -17,7 +17,7 @@ struct Datos{
 	int dni;
 }*personas,*ptr_personas;
 
-void Cargar_datos(){
+    void Cargar_datos(){
 	
 	printf("INGRESAR DATOS DE PERSONAS\n");
 	
