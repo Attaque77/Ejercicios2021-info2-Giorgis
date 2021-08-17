@@ -13,18 +13,16 @@ struct mercaderia{
 	float precio;
 	char descripcion [SIZE];
 	
-}producto,*ptr_producto;        
+}*producto,*ptr_producto;        
 
-void Cargar_datos(){
+void Cargar_datos(int *cant){
 	
-	int cant;
 	printf("\nCANTIDAD DE PRODUCTOS: ");
-	scanf("%d",&cant);
+	scanf("%d",cant);
 	
-	for(int i=1; i<=cant; i++){
+	for(int i=1; i<=(*cant); i++){
 		
-		ptr_producto=( struct mercaderia *) calloc (cant,sizeof(struct mercaderia) );   //Asignamos memoria dinámica
-		ptr_producto=&producto;                                                         //Inicializamos el puntero a la direccion de memoria de la estructura
+		ptr_producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );   //(struct mercaderia*) es el casteo, es el puntero al a la direccion
 		
 		printf("\nIngrese su producto: ");
 		scanf("%s",ptr_producto->descripcion);
@@ -38,9 +36,6 @@ void Cargar_datos(){
 		ptr_producto=NULL;                                                               /*Apuntamos a NULL porque el puntero tiene todavía las direcciones 
 		                                                                                   de memoria guardadas pero no las puede usar porque ya las liberó*/
 	}  
-	
-	ptr_producto=( struct mercaderia *) calloc (cant,sizeof(struct mercaderia) );
-	ptr_producto=&producto;
 }
 	
 	void Almacenar_datos(){
@@ -51,14 +46,14 @@ void Cargar_datos(){
 			printf("\nError al abrir el archivo para escritura");
 		}
 		else{
-			fwrite(&producto, sizeof (struct mercaderia), 1, archivo);                   
+			fwrite(ptr_producto, sizeof (struct mercaderia), 1, archivo);                   
 			fclose(archivo);
 		}
 	}
 		
-	void Lectura_datos(){
+	void Lectura_datos(int *cant){
 			
-		ptr_producto=&producto;
+		producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );
 		FILE *archivo;
 			
 		if( (archivo=fopen("SUPERMERCADO.dat","rb") ) == NULL){
@@ -68,23 +63,25 @@ void Cargar_datos(){
 		else{
 				
 			printf("\nlISTA DE DATOS INGRESADOR\n");
-			fread(ptr_producto,sizeof(producto),1,archivo);
+			fread(producto,sizeof(struct mercaderia),1,archivo);
 				
 		while ( !feof(archivo)) {
-			printf("\nProductos: %s\n", ptr_producto->descripcion);
-			printf("Codigo: %i\n", ptr_producto->codigo);
-			printf("Precio: %.2f\n",ptr_producto->precio);
-			fread(ptr_producto,sizeof(producto),1,archivo);               //Si no se coloca entra en un bucle infinito,                                      
+			printf("\nProductos: %s\n", producto->descripcion);
+			printf("Codigo: %i\n", producto->codigo);
+			printf("Precio: %.2f\n",producto->precio);
+			fread(producto,sizeof(struct mercaderia),1,archivo);          //Si no se coloca entra en un bucle infinito,                                      
 		}
 		}
 			fclose(archivo);
+		    free(producto);
+			producto=NULL;
 		}
 			
-		void Mostrar_datos_codigo(){
+		void Mostrar_datos_codigo(int *cant){
 			
 			int valor;	
 			FILE *archivo;
-			ptr_producto=&producto;
+			producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );
 			
 			printf("\nIngrese el codigo: ");
 			scanf("%d",&valor);
@@ -93,24 +90,26 @@ void Cargar_datos(){
 				printf("Error al abrir el archivo de lectura");
 			}
 				
-			fread(ptr_producto,sizeof(producto),1,archivo);                      //Para que feof tenga referencia de donde leer
+			fread(producto,sizeof(struct mercaderia),1,archivo);                      //Para que feof tenga referencia de donde leer
 				
 			while ( !feof(archivo)) {
 					
-				if(valor==(ptr_producto->codigo)){                                  
-					printf("\nProductos: %s\n", ptr_producto->descripcion);
-					printf("Codigo: %i\n",ptr_producto->codigo);
-					printf("Precio: %.2f\n",ptr_producto->precio);
+				if(valor==(producto->codigo)){                                  
+					printf("\nProductos: %s\n",producto->descripcion);
+					printf("Codigo: %i\n",producto->codigo);
+					printf("Precio: %.2f\n",producto->precio);
 				}
 					
-				fread(ptr_producto,sizeof(producto),1,archivo);	                 //Para que no me tome 2 veces un valor del archivo
+				fread(producto,sizeof(struct mercaderia),1,archivo);	                 //Para que no me tome 2 veces un valor del archivo
 				}
 				fclose(archivo);
+			    free(producto);
+			    producto=NULL;
 			}
 				
 int main() {
 					
-	int dato;
+	int dato,cant_1;
 	
 	do{
 		printf("COLOCAR EL NUMERO DE LA OPCION A SELECCIONAR");
@@ -123,9 +122,9 @@ int main() {
 		
 		switch(dato){
 			
-		case 1:Cargar_datos();break;
-		case 2:Lectura_datos();break;
-		case 3:Mostrar_datos_codigo();break;
+		case 1:Cargar_datos(&cant_1);break;
+		case 2:Lectura_datos(&cant_1);break;
+		case 3:Mostrar_datos_codigo(&cant_1);break;
 		}
 		
 		printf("\n");
