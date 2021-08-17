@@ -13,7 +13,7 @@ struct mercaderia{
 	float precio;
 	char descripcion [SIZE];
 	
-}*producto,*ptr_producto;        
+}*producto,*ptr_producto;        //*ptr_producto lo utilizo para escritura   *producto lo uso para lectura
 
 void Cargar_datos(int *cant){
 	
@@ -22,8 +22,9 @@ void Cargar_datos(int *cant){
 	
 	for(int i=1; i<=(*cant); i++){
 		
-		ptr_producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );   //(struct mercaderia*) es el casteo, es el puntero al a la direccion
-		
+		ptr_producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );   /*(struct mercaderia*) es el casteo, para indicar el tipo de dato 
+		                                                                                   del puntero devuelto, y para que el puntero sepa la longitud
+		                                                                                   del tipo de dato en la memoria*/                                                                                       
 		printf("\nIngrese su producto: ");
 		scanf("%s",ptr_producto->descripcion);
 		printf("Ingrese el c%cdigo: ",162);
@@ -51,9 +52,9 @@ void Cargar_datos(int *cant){
 		}
 	}
 		
-	void Lectura_datos(int *cant){
+	void Lectura_datos(int *cant){                                                      //Le paso la cantidad de productos - argumento-
 			
-		producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );
+		producto=( struct mercaderia*) calloc ((*cant),sizeof(struct mercaderia) );     //Volvemos a pedir memoria
 		FILE *archivo;
 			
 		if( (archivo=fopen("SUPERMERCADO.dat","rb") ) == NULL){
@@ -63,13 +64,13 @@ void Cargar_datos(int *cant){
 		else{
 				
 			printf("\nlISTA DE DATOS INGRESADOR\n");
-			fread(producto,sizeof(struct mercaderia),1,archivo);
+			fread(producto,sizeof(struct mercaderia),1,archivo);                       //Leemos el archivo binario
 				
-		while ( !feof(archivo)) {
+		while ( !feof(archivo)) {                                                      //feof= fin de archivo- hasta que no lo encuentre no termina-
 			printf("\nProductos: %s\n", producto->descripcion);
 			printf("Codigo: %i\n", producto->codigo);
 			printf("Precio: %.2f\n",producto->precio);
-			fread(producto,sizeof(struct mercaderia),1,archivo);          //Si no se coloca entra en un bucle infinito,                                      
+			fread(producto,sizeof(struct mercaderia),1,archivo);                       //seguimos leyendo hasta que encuentre el fin de archivo              
 		}
 		}
 			fclose(archivo);
