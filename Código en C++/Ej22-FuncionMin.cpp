@@ -7,7 +7,7 @@ using namespace std;
 	else if (B<A)
 		cout<<"El valor mas chico es:"<< B << endl;
 }
-	void minimo (float A=3.0, float B=5.0){
+	void minimo (float A=3.0, float B= 5.0){
 		if (A<B)
 			cout<<"El valor mas chico es:"<< A << endl;
 		else if (B<A)

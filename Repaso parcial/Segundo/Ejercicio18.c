@@ -23,7 +23,7 @@ struct Datos{
 	
 	for(int i=0;i<5;i++){
 		
-		ptr_personas=( struct Datos *) calloc (5,sizeof(struct Datos) );                 //Asignamos memoria dinámica
+		ptr_personas=( struct Datos *) calloc (1,sizeof(struct Datos) );                 //Asignamos memoria dinámica
 
 		printf("\nNombre: ");
 		scanf("%s",ptr_personas->nombre);

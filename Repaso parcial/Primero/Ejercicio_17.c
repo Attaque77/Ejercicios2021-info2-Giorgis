@@ -8,7 +8,6 @@ void Lectura_datos();
 void Mostrar_datos_codigo();
 
 struct mercaderia{
- 	
 	int codigo;
 	float precio;
 	char descripcion [SIZE];
