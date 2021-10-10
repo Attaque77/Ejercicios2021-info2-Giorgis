@@ -1,0 +1,1 @@
+Falta agregar el caso en el que todos los puntos son iguales.
