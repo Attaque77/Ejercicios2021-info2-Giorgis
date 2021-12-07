@@ -18,7 +18,7 @@ int main(int argc, char *argv[]) {
 	
 	float a=4.5;
 	float b=1.6;
-	minimo(a,b);
+	minimo(a);
 	minimo(1,2);
 	return 0;
 }

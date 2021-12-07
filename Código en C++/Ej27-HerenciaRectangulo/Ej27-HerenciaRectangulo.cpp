@@ -1,0 +1,35 @@
+#include <iostream>
+#include  <locale.h>     //Librería para colocar simbolos del código ascii
+#include "Rectangulo.h"
+
+using namespace std;
+
+int main(){
+	
+	setlocale (LC_CTYPE, "Spanish");  //función para los acentos
+	
+	int i;
+	cuadrado m (0,3,3); 
+	cuadrado m1 (1,1,5);;
+	
+	cout<<"El área del primer rectángulo es: "<< m.area() <<endl;
+	cout<<"El área del segundo rectángulo es: "<< m1.area() <<endl;
+	cout<<"El perímetro del primer rectángulo es: "<< m.perimetro() <<endl;
+	cout<<"El perímetro del segundo rectángulo es: "<< m1.perimetro() <<endl;
+	
+	
+	i=m.dentro(m1);
+	
+	if(i==1 || i==4){
+		cout<<"El primero lo contiene al segundo"<<endl;
+	}
+	else if(i==2 || i==5){
+		cout<<"El segundo contiene al primero"<<endl;
+	}
+	else if (i==3 || i==6){
+		cout<<"Ninguno contiene a ninguno, no se tocan"<<endl;
+	}
+	
+	return 0;
+}
+	
